@@ -1,0 +1,43 @@
+<div class="auth-form">
+    <div class="form-body">
+        <div class="title-center">
+            <h1>Registro</h1>
+        </div>
+        <form [formGroup]="signupForm" (ngSubmit)="saveForm()">
+            <div class="mb-1">
+                <label class="form-label">Usuario</label>
+                <input type="text" class="form-control" formControlName="user" [ngClass]="{ 'is-invalid': submitted && fc.user.errors }" />
+                <div *ngIf="submitted && fc.user.errors" class="invalid-feedback">
+                    <div *ngIf="fc.user.errors.required">Por favor, ingresa tus Nombres y Apellidos</div>
+                </div>
+            </div>
+            <div class="mb-1">
+                <label class="form-label">Password</label>
+                <input type="password" class="form-control" formControlName="password" required>
+            </div>
+            <div class="mb-1">
+                <label class="form-label">Nombre</label>
+                <input type="text" class="form-control" formControlName="name" required>
+            </div>
+            <div class="mb-1">
+                <label class="form-label">Apellidos</label>
+                <input type="text" class="form-control" formControlName="lastname">
+            </div>
+            <div class="mb-1">
+                <label class="form-label">Teléfono</label>
+                <input type="text" class="form-control" formControlName="phone">
+            </div>
+            <div class="mb-1">
+                <label class="form-label">Email</label>
+                <div class="input-group">
+                    <span class="input-group-text" id="basic-addon1">@</span>
+                    <input type="email" class="form-control" formControlName="email" required>
+                </div>
+            </div>
+            <br>
+            <div class="title-center">
+                <button type="submit" class="btn btn-primary">Registrar</button>
+            </div>
+        </form>
+    </div>
+</div>
