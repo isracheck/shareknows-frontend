@@ -6,22 +6,31 @@
         <form [formGroup]="signupForm" (ngSubmit)="saveForm()">
             <div class="mb-1">
                 <label class="form-label">Usuario</label>
-                <input type="text" class="form-control" formControlName="user" [ngClass]="{ 'is-invalid': submitted && fc.user.errors }" />
-                <div *ngIf="submitted && fc.user.errors" class="invalid-feedback">
-                    <div *ngIf="fc.user.errors.required">Por favor, ingresa tus Nombres y Apellidos</div>
+                <input type="text" class="form-control" formControlName="user" [ngClass]="{ 'is-invalid': submitted && fc['user'].errors }" />
+                <div *ngIf="submitted && fc['user'].errors" class="invalid-feedback">
+                    <div *ngIf="fc['user'].errors['required']">Ingresa un usuario de mínimo 6 carácteres.</div>
                 </div>
             </div>
             <div class="mb-1">
                 <label class="form-label">Password</label>
-                <input type="password" class="form-control" formControlName="password" required>
+                <input type="password" class="form-control" formControlName="password" [ngClass]="{ 'is-invalid': submitted && fc['password'].errors }">
+                <div *ngIf="submitted && fc['password'].errors" class="invalid-feedback">
+                    <div *ngIf="fc['password'].errors['required']">Ingresa un password de mínimo 6 carácteres.</div>
+                </div>
             </div>
             <div class="mb-1">
                 <label class="form-label">Nombre</label>
-                <input type="text" class="form-control" formControlName="name" required>
+                <input type="text" class="form-control" formControlName="name" [ngClass]="{ 'is-invalid': submitted && fc['name'].errors }">
+                <div *ngIf="submitted && fc['name'].errors" class="invalid-feedback">
+                    <div *ngIf="fc['name'].errors['required']">Ingresa tu nombre.</div>
+                </div>
             </div>
             <div class="mb-1">
                 <label class="form-label">Apellidos</label>
-                <input type="text" class="form-control" formControlName="lastname">
+                <input type="text" class="form-control" formControlName="lastname" [ngClass]="{ 'is-invalid': submitted && fc['lastname'].errors }">
+                <div *ngIf="submitted && fc['lastname'].errors" class="invalid-feedback">
+                    <div *ngIf="fc['lastname'].errors['required']">Ingresa tu apellido.</div>
+                </div>
             </div>
             <div class="mb-1">
                 <label class="form-label">Teléfono</label>
@@ -31,7 +40,10 @@
                 <label class="form-label">Email</label>
                 <div class="input-group">
                     <span class="input-group-text" id="basic-addon1">@</span>
-                    <input type="email" class="form-control" formControlName="email" required>
+                    <input type="email" class="form-control" formControlName="email" [ngClass]="{ 'is-invalid': submitted && fc['email'].errors }">
+                    <div *ngIf="submitted && fc['email'].errors" class="invalid-feedback">
+                        <div *ngIf="fc['email'].errors['required']">Ingresa un email válido.</div>
+                    </div>
                 </div>
             </div>
             <br>
