@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { UserModel } from '../../model/user.model';
 import { UserService } from '../../services/user.service';
 
@@ -18,7 +19,7 @@ export class SignupComponent implements OnInit {
   // convenience getter for easy access to form fields
   get fc() { return this.signupForm.controls; }
 
-  constructor(private userService: UserService) { 
+  constructor(private userService: UserService, private toastr: ToastrService) { 
     this.signupForm = this.createForm();
   }
 
@@ -36,7 +37,9 @@ export class SignupComponent implements OnInit {
     });
   }
 
-  saveForm(): void {
+  
+
+  saveData(): void {
     
     this.submitted = true;
 
@@ -51,9 +54,11 @@ export class SignupComponent implements OnInit {
 
       
       this.userService.signUp(userSave).subscribe( data => {
+        this.toastr.success('Alta procesada correctamente','Bienvenido');
         console.log('OK',data);
       },
       error => {
+        this.toastr.error('Parece que tenemos un error','Ups!',);
         console.log('Error',error);
       });
     } else {

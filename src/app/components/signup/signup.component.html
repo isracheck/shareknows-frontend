@@ -3,7 +3,7 @@
         <div class="title-center">
             <h1>Registro</h1>
         </div>
-        <form [formGroup]="signupForm" (ngSubmit)="saveForm()">
+        <form [formGroup]="signupForm" (ngSubmit)="saveData()">
             <div class="mb-1">
                 <label class="form-label">Usuario</label>
                 <input type="text" class="form-control" formControlName="user" [ngClass]="{ 'is-invalid': submitted && fc['user'].errors }" />

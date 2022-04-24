@@ -1,0 +1,29 @@
+<div class="auth-form">
+    <div class="form-body">
+        <div class="title-center">
+            <h1>Registro</h1>
+        </div>
+        <form [formGroup]="signinForm" (ngSubmit)="saveData()">
+            <div class="mb-1">
+                <label class="form-label">Email</label>
+                <div class="input-group">
+                    <input type="email" class="form-control" formControlName="email" [ngClass]="{ 'is-invalid': submitted && fc['email'].errors }">
+                    <div *ngIf="submitted && fc['email'].errors" class="invalid-feedback">
+                        <div *ngIf="fc['email'].errors['required']">Ingresa tu email</div>
+                    </div>
+                </div>
+            </div>
+            <div class="mb-1">
+                <label class="form-label">Password</label>
+                <input type="password" class="form-control" formControlName="password" [ngClass]="{ 'is-invalid': submitted && fc['password'].errors }">
+                <div *ngIf="submitted && fc['password'].errors" class="invalid-feedback">
+                    <div *ngIf="fc['password'].errors['required']">Ingresa tu password</div>
+                </div>
+            </div> 
+            <br>
+            <div class="title-center">
+                <button type="submit" class="btn btn-primary">Registrar</button>
+            </div>
+        </form>
+    </div>
+</div>
