@@ -1,0 +1,33 @@
+<div class="card" style="width: 18rem;">
+  <img [src]="eventData.picture || '../../../assets/images/noimage.jpeg'" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">{{eventData.title}}</h5>
+    <p class="card-text">{{eventData.description}}</p>
+    Fecha <div class="badge bg-success my-2">{{eventData.startdate | date:'dd/mm/yyyy'}}</div> Huecos <div class="badge bg-primary my-2">{{eventData.maxPeople-totalJoined}}/{{eventData.maxPeople }}</div>
+    <br>
+    <div class="d-grid gap-2">
+      <a (click)="triggerModal(modalData)" class="btn btn-dark">Apuntarme</a>
+      <a href="#" class="btn btn-dark">Ver más</a>
+    </div>
+  </div>
+</div>
+
+
+<ng-template #modalData let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Angular Bootstrap Modal Popup</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p><strong>Are you sure you want to delete <span class="text-primary">"Agatha Harkness"</span> profile?</strong></p>
+    
+    <p>All data related to west view profile will be removed permanently.
+    </p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-danger" (click)="modal.close('Save click')">Close</button>
+    <button type="button" class="btn btn-success" (click)="modal.close('Save click')">Save</button>
+  </div>
+</ng-template>

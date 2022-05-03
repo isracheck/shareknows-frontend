@@ -22,14 +22,12 @@ export class UserService {
 
 
     signUp(info: UserModel): Observable<string> {
-        console.log(this.usersUrl+'signUp');
-        console.log(info);
+       
         return this.http.post<string>(this.usersUrl+'signUp', info, httpOptions);
     }
 
     signIn(info: UserModel): Observable<string> {
-        console.log(this.usersUrl+'signIn');
-        console.log(info);
+       
         return this.http.post<string>(this.usersUrl+'signIn', info, httpOptions);
     }
 

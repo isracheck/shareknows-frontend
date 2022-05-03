@@ -15,10 +15,11 @@ const httpOptions = {
   providedIn: 'root'
 })
 
-export class CityService {
+export class CommonsService {
 
     private serviceCityUrl = environment.baseUrl + 'api/cities/';
     private serviceCountryUrl = environment.baseUrl + 'api/countries/';
+    private serviceLanguagesUrl = environment.baseUrl + 'api/languages/';
 
     constructor(private http: HttpClient) { }
 
@@ -36,4 +37,10 @@ export class CityService {
         }));
     }
 
+    getLanguages(): Observable<any> {
+      return this.http.get<any>(this.serviceLanguagesUrl+"all")
+        .pipe(map(languages => {
+          return languages;
+        }));
+    }
 }

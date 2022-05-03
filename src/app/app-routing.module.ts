@@ -4,16 +4,18 @@ import { ContentComponent } from './components/content/content.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { LoginComponent } from './components/login/login.component';
 import { CreateEventComponent } from './components/events/create-event/create-event.component';
+import { ModalEventComponent } from './components/events/modal-event/modal-event.component';
 
 const routes: Routes = [
 
-  { path: 'content', component: ContentComponent },
+  { path: 'home', component: ContentComponent },
   { path: 'events/createEvent', component: CreateEventComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'modal', component: ModalEventComponent },
 
   // Otherwise redir home
-  { path: '', redirectTo: 'content', pathMatch: 'full' }
+  { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 
 @NgModule({

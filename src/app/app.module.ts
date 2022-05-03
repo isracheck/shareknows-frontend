@@ -13,6 +13,9 @@ import { LoginComponent } from './components/login/login.component';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CreateEventComponent } from './components/events/create-event/create-event.component';
+import { CardEventComponent } from './components/events/card-event/card-event.component';
+import { ModalEventComponent } from './components/events/modal-event/modal-event.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -23,6 +26,8 @@ import { CreateEventComponent } from './components/events/create-event/create-ev
     SignupComponent,
     LoginComponent,
     CreateEventComponent,
+    CardEventComponent,
+    ModalEventComponent,
   ],
   imports: [
     BrowserModule,
@@ -32,6 +37,7 @@ import { CreateEventComponent } from './components/events/create-event/create-ev
     HttpClientModule,
     FormsModule,
     ToastrModule.forRoot(),
+    NgbModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -97,11 +97,20 @@
                         <div *ngIf="fc['maxPeople'].errors['required']">Ingresa el máximo de personas que pueden asistir</div>
                     </div>
                 </div>
+                <div class="col mb-1">
+                    <label class="form-label">Main Lenguaje</label>
+                    <select class="form-select" formControlName="idlanguaje" [ngClass]="{ 'is-invalid': submitted && fc['idlanguaje'].errors }">
+                        <option *ngFor="let languaje of languagesList;" [value]="languaje.idlanguage">{{languaje.description}}</option>
+                    </select>
+                    <div *ngIf="submitted && fc['idlanguaje'].errors" class="invalid-feedback">
+                        <div *ngIf="fc['idlanguaje'].errors['required']">Ingresa una lenguaje base para tu evento</div>
+                    </div>
+                </div>
             </div>
 
             <br>
             <div class="title-center">
-                <button type="submit" class="btn btn-primary">Registrar</button>
+                <button type="submit" class="btn btn-success">Registrar</button>
             </div>
         </form>
     </div>

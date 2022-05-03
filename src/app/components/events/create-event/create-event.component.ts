@@ -4,9 +4,10 @@ import { ToastrService } from 'ngx-toastr';
 import { EventService } from '../../../services/event.service';
 import { EventModel } from '../../../model/event.model';
 import { CountryModel } from 'src/app/model/country.model';
-import { CityService } from '../../../services/city.service';
+import { CommonsService } from '../../../services/commons.service';
 import { first } from 'rxjs/operators';
 import { CityModel } from '../../../model/city.model';
+import { LanguageModel } from '../../../model/language.model';
 
 @Component({
   selector: 'app-create-event',
@@ -18,6 +19,7 @@ export class CreateEventComponent implements OnInit {
   // Combos
   countryList: CountryModel[] = [];
   cityList: CityModel[] = [];
+  languagesList: LanguageModel[] = [];
 
   // Formulario controller
   public saveForm: FormGroup;
@@ -31,17 +33,18 @@ export class CreateEventComponent implements OnInit {
   // convenience getter for easy access to form fields
   get fc() { return this.saveForm.controls; }
 
-  constructor(private eventService: EventService, private toastService: ToastrService, private cityService: CityService) { 
+  constructor(private eventService: EventService, private toastService: ToastrService, private commonsService: CommonsService) { 
   
     this.saveForm = this.createForm();
   }
 
   ngOnInit(): void {
     this.loadCountries();
+    this.loadLanguages();
   }
 
   private loadCountries() {
-    this.cityService.getCountries()
+    this.commonsService.getCountries()
     .pipe(first())
       .subscribe(
         data => {
@@ -54,7 +57,7 @@ export class CreateEventComponent implements OnInit {
   }
 
   private loadCities(idCountry: string) {
-    this.cityService.getCities(idCountry)
+    this.commonsService.getCities(idCountry)
     .pipe(first())
       .subscribe(
         data => {
@@ -62,6 +65,19 @@ export class CreateEventComponent implements OnInit {
         },
         error => {
           this.toastService.error('Error loading cities: ' + error.error.message);
+        }
+      );
+  }
+
+  private loadLanguages() {
+    this.commonsService.getLanguages()
+    .pipe(first())
+      .subscribe(
+        data => {
+          this.languagesList = data;
+        },
+        error => {
+          this.toastService.error('Error loading languages: ' + error.error.message);
         }
       );
   }
@@ -84,13 +100,14 @@ export class CreateEventComponent implements OnInit {
       idcity: new FormControl('', [Validators.required]),
       value: new FormControl('0', [Validators.required]),
       maxPeople: new FormControl('', [Validators.required]),
+      idlanguaje: new FormControl('', [Validators.required]),
     });
   }
 
   
 
   saveData(): void {
-    console.log(this.saveForm);
+
     this.submitted = true;
 
     if (this.saveForm.valid) {
