@@ -1,6 +1,7 @@
 
 
 export class EventModel {
+  idevent!: Number;
   title!: string;
   description!: string;
   picture!: string;
@@ -11,7 +12,7 @@ export class EventModel {
   address!: string;
   postalcode!: string;
   idcity!: string;
-  iduser!: Number;
+  username!: string;
   value!: Number;
   maxPeople!: Number;
 }

@@ -7,6 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TokenStorageService } from '../../auth/token-storage.service';
 import { ToastrService } from 'ngx-toastr';
 import { first } from 'rxjs/operators';
+import { AuthLoginInfo } from '../../model/login.model';
 
 @Component({
   selector: 'app-login',
@@ -24,7 +25,7 @@ export class LoginComponent implements OnInit {
   // convenience getter for easy access to form fields
   get fc() { return this.signinForm.controls; }
 
-  constructor(private userService: UserService,
+  constructor(
     private authService: AuthService,
     private route: ActivatedRoute,
     private router: Router,
@@ -49,7 +50,7 @@ export class LoginComponent implements OnInit {
     this.submitted = true;
 
     if (this.signinForm.valid) {
-      const userSave = new UserModel();
+      const userSave = new AuthLoginInfo();
       userSave.password = this.signinForm.value.password;
       userSave.username = this.signinForm.value.username;
 
@@ -59,7 +60,7 @@ export class LoginComponent implements OnInit {
       .subscribe(
         data => {
           this.role = this.tokenStorage.getAuthority();
-
+          this.toastService.show('Bienvenido '+this.tokenStorage.getUsername());
           // Return to source URL
           this.router.navigate(['/home']);
           //this.isLoading = false;

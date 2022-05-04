@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { JwtResponse } from '../model/jwt-response';
 import { AuthLoginInfo } from '../model/login.model';
+import { UserModel } from '../model/user.model';
 import { TokenStorageService } from './token-storage.service';
 
 
@@ -17,7 +18,7 @@ const httpOptions = {
 })
 export class AuthService {
 
-  private loginUrl = environment.baseUrl + 'api/auth/signin';
+  private loginUrl = environment.baseUrl + 'api/auth/';
 
   constructor(
     private http: HttpClient,
@@ -26,7 +27,7 @@ export class AuthService {
   }
 
   attemptAuth(credentials: AuthLoginInfo): Observable<JwtResponse> {
-    return this.http.post<JwtResponse>(this.loginUrl, credentials, httpOptions)
+    return this.http.post<JwtResponse>(this.loginUrl+'signin', credentials, httpOptions)
       .pipe(map(user => {
         // login successful if there's a jwt token in the response
         if (user && user.accessToken) {
@@ -40,6 +41,10 @@ export class AuthService {
 
         return user;
     }));
+  }
+
+  signup(info: UserModel): Observable<string> {
+    return this.http.post<any>(this.loginUrl+'signup', info, httpOptions);
   }
 
   logOut() {

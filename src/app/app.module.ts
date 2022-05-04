@@ -17,6 +17,8 @@ import { CardEventComponent } from './components/events/card-event/card-event.co
 import { ModalEventComponent } from './components/events/modal-event/modal-event.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { JwtInterceptor } from './auth/jwt.interceptor';
+import { MyeventsComponent } from './components/events/myevents/myevents.component';
+import { MyeventsDetailComponent } from './components/events/myevents-detail/myevents-detail.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,8 @@ import { JwtInterceptor } from './auth/jwt.interceptor';
     CreateEventComponent,
     CardEventComponent,
     ModalEventComponent,
+    MyeventsComponent,
+    MyeventsDetailComponent,
   ],
   imports: [
     BrowserModule,

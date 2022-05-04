@@ -1,5 +1,5 @@
 <div class="card" style="width: 18rem;">
-  <img [src]="eventData.picture || '../../../assets/images/noimage.jpeg'" class="card-img-top" alt="...">
+  <img [src]="eventData.picture || '../../../assets/images/noimage.jpeg'" class="card-img-top" alt="..." *ngIf="imagen">
   <div class="card-body">
     <h5 class="card-title">{{eventData.title}}</h5>
     <p class="card-text">{{eventData.description}}</p>

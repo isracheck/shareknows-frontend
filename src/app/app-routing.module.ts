@@ -5,6 +5,8 @@ import { SignupComponent } from './components/signup/signup.component';
 import { LoginComponent } from './components/login/login.component';
 import { CreateEventComponent } from './components/events/create-event/create-event.component';
 import { ModalEventComponent } from './components/events/modal-event/modal-event.component';
+import { HeaderComponent } from './components/header/header.component';
+import { MyeventsComponent } from './components/events/myevents/myevents.component';
 
 const routes: Routes = [
 
@@ -13,6 +15,7 @@ const routes: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'login', component: LoginComponent },
   { path: 'modal', component: ModalEventComponent },
+  { path: 'events/myevents', component: MyeventsComponent },
 
   // Otherwise redir home
   { path: '', redirectTo: 'home', pathMatch: 'full' }

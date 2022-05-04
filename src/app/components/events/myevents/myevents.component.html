@@ -1,0 +1,33 @@
+<div class="container-fluid">
+    <p class="lead">Mis Eventos</p>
+    
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Titulo</th>
+            <th scope="col">Fecha inicio</th>
+            <th scope="col">Hora inicio</th>
+            <th scope="col">Fecha final</th>
+            <th scope="col">Hora final</th>
+            <th scope="col">Valor</th>
+            <th scope="col">Asistentes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let event of eventsList;">
+            <th scope="row">{{event.idevent}}</th>
+            <td>{{event.title}}</td>
+            <td>{{event.startdate | date:'dd/MM/YYYY'}}</td>
+            <td>{{event.startdate | date:'hh:mm'}}</td>
+            <td>{{event.enddate | date:'dd/MM/yyyy'}}</td>
+            <td>{{event.enddate | date:'hh:mm'}}</td>
+            <td>{{event.value}}</td>
+            <td>{{event.maxPeople}}</td>
+            <td><img src="../../../assets/images/window.svg" alt="Login" width="25" height="25"></td>
+            <td><img src="../../../assets/images/modify.svg" alt="Login" width="25" height="25"> </td>
+            <td><img src="../../../assets/images/delete.svg" alt="Login" width="25" height="25"></td>
+          </tr>
+        </tbody>
+      </table>
+  </div>

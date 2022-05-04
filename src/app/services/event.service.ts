@@ -33,6 +33,14 @@ export class EventService {
         }));
     }
 
+    getEventsByUser(username: any): Observable<any> {
+
+      return this.http.get<any>(this.serviceUrl+"findByUsername/"+username)
+        .pipe(map(events => {
+          return events;
+        }));
+    }
+
     getJoiners(idevent: any): Observable<any> {
       return this.http.get<any>(this.serviceUrl+"findJoiners/"+idevent)
         .pipe(map(events => {

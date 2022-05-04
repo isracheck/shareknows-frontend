@@ -13,6 +13,7 @@ import { EventService } from '../../../services/event.service';
 export class CardEventComponent implements OnInit {
 
   @Input() eventData: any | undefined;
+  @Input() imagen: any | true;
 
   closeModal: string | undefined;
   totalJoined: number = 0;

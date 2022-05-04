@@ -10,7 +10,7 @@
     <p class="lead">Próximos Eventos</p>
     <div class="row">
       <div class="col" *ngFor="let event of eventsList;">
-        <app-card-event [eventData]="event"></app-card-event>
+        <app-card-event [eventData]="event" [imagen]="true"></app-card-event>
         <br>
       </div>
     </div>

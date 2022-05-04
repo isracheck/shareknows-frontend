@@ -3,6 +3,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { UserModel } from '../../model/user.model';
 import { UserService } from '../../services/user.service';
+import { AuthService } from '../../auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -19,7 +21,7 @@ export class SignupComponent implements OnInit {
   // convenience getter for easy access to form fields
   get fc() { return this.signupForm.controls; }
 
-  constructor(private userService: UserService, private toastr: ToastrService) { 
+  constructor(private authService: AuthService, private toastr: ToastrService, private router: Router,) { 
     this.signupForm = this.createForm();
   }
 
@@ -42,20 +44,22 @@ export class SignupComponent implements OnInit {
   saveData(): void {
     
     this.submitted = true;
+    console.log(this.signupForm);
 
     if (this.signupForm.valid) {
       const userSave = new UserModel();
       userSave.username = this.signupForm.value.username;
-      userSave.password = this.signupForm.value.password;
+      userSave.hash = this.signupForm.value.password;
       userSave.name = this.signupForm.value.name;
       userSave.lastname = this.signupForm.value.lastname;
       userSave.phone = this.signupForm.value.phone;
       userSave.email = this.signupForm.value.email;
 
       
-      this.userService.signUp(userSave).subscribe( data => {
+      this.authService.signup(userSave).subscribe( data => {
         this.toastr.success('Alta procesada correctamente','Bienvenido');
         console.log('OK',data);
+        this.router.navigate(['/home']);
       },
       error => {
         this.toastr.error('Parece que tenemos un error','Ups!',);

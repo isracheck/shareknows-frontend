@@ -8,6 +8,8 @@ import { CommonsService } from '../../../services/commons.service';
 import { first } from 'rxjs/operators';
 import { CityModel } from '../../../model/city.model';
 import { LanguageModel } from '../../../model/language.model';
+import { TokenStorageService } from '../../../auth/token-storage.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-event',
@@ -33,7 +35,10 @@ export class CreateEventComponent implements OnInit {
   // convenience getter for easy access to form fields
   get fc() { return this.saveForm.controls; }
 
-  constructor(private eventService: EventService, private toastService: ToastrService, private commonsService: CommonsService) { 
+  constructor(private eventService: EventService, private toastService: ToastrService, 
+              private commonsService: CommonsService, private tokenStorageService: TokenStorageService,
+              private router: Router,
+              ) { 
   
     this.saveForm = this.createForm();
   }
@@ -122,13 +127,14 @@ export class CreateEventComponent implements OnInit {
       eventSave.postalcode = this.saveForm.value.postalcode;
       eventSave.idcity = this.saveForm.value.idcity;
       eventSave.value = this.saveForm.value.value;
-      eventSave.iduser = 3;
+      eventSave.username = this.tokenStorageService.getUsername();
       eventSave.maxPeople = this.saveForm.value.maxPeople;
 
       
       this.eventService.save(eventSave).subscribe( data => {
-        this.toastService.success('Evento creado correctamente','Genail');
+        this.toastService.success('Evento creado correctamente','Genial');
         console.log('OK',data);
+        this.router.navigate(['/home']);
       },
       error => {
         this.toastService.error('Parece que tenemos un error','Ups!',);
