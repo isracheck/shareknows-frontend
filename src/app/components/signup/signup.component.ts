@@ -28,7 +28,7 @@ export class SignupComponent implements OnInit {
 
   createForm() {
     return new FormGroup({
-      user: new FormControl('', [Validators.required, Validators.minLength(6)]),
+      username: new FormControl('', [Validators.required, Validators.minLength(6)]),
       password: new FormControl('', [Validators.required, Validators.minLength(6)]),
       name: new FormControl('', [Validators.required, Validators.minLength(3)]),
       lastname: new FormControl('', [Validators.required]),
@@ -45,7 +45,7 @@ export class SignupComponent implements OnInit {
 
     if (this.signupForm.valid) {
       const userSave = new UserModel();
-      userSave.user = this.signupForm.value.user;
+      userSave.username = this.signupForm.value.username;
       userSave.password = this.signupForm.value.password;
       userSave.name = this.signupForm.value.name;
       userSave.lastname = this.signupForm.value.lastname;

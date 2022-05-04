@@ -6,9 +6,9 @@
         <form [formGroup]="signupForm" (ngSubmit)="saveData()">
             <div class="mb-1">
                 <label class="form-label">Usuario</label>
-                <input type="text" class="form-control" formControlName="user" [ngClass]="{ 'is-invalid': submitted && fc['user'].errors }" />
-                <div *ngIf="submitted && fc['user'].errors" class="invalid-feedback">
-                    <div *ngIf="fc['user'].errors['required']">Ingresa un usuario de mínimo 6 carácteres.</div>
+                <input type="text" class="form-control" formControlName="username" [ngClass]="{ 'is-invalid': submitted && fc['username'].errors }" />
+                <div *ngIf="submitted && fc['username'].errors" class="invalid-feedback">
+                    <div *ngIf="fc['username'].errors['required']">Ingresa un usuario de mínimo 6 carácteres.</div>
                 </div>
             </div>
             <div class="mb-1">
