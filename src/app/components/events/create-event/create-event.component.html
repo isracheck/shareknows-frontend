@@ -99,11 +99,11 @@
                 </div>
                 <div class="col mb-1">
                     <label class="form-label">Main Lenguaje</label>
-                    <select class="form-select" formControlName="idlanguaje" [ngClass]="{ 'is-invalid': submitted && fc['idlanguaje'].errors }">
+                    <select class="form-select" formControlName="idlanguage" [ngClass]="{ 'is-invalid': submitted && fc['idlanguage'].errors }">
                         <option *ngFor="let languaje of languagesList;" [value]="languaje.idlanguage">{{languaje.description}}</option>
                     </select>
-                    <div *ngIf="submitted && fc['idlanguaje'].errors" class="invalid-feedback">
-                        <div *ngIf="fc['idlanguaje'].errors['required']">Ingresa una lenguaje base para tu evento</div>
+                    <div *ngIf="submitted && fc['idlanguage'].errors" class="invalid-feedback">
+                        <div *ngIf="fc['idlanguage'].errors['required']">Ingresa una lenguaje base para tu evento</div>
                     </div>
                 </div>
             </div>

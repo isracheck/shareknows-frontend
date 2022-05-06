@@ -19,6 +19,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { JwtInterceptor } from './auth/jwt.interceptor';
 import { MyeventsComponent } from './components/events/myevents/myevents.component';
 import { MyeventsDetailComponent } from './components/events/myevents-detail/myevents-detail.component';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { MyeventsDetailComponent } from './components/events/myevents-detail/mye
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })

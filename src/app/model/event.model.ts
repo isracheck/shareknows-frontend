@@ -12,6 +12,7 @@ export class EventModel {
   address!: string;
   postalcode!: string;
   idcity!: string;
+  idlanguage!: string;
   username!: string;
   value!: Number;
   maxPeople!: Number;

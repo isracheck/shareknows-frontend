@@ -105,7 +105,7 @@ export class CreateEventComponent implements OnInit {
       idcity: new FormControl('', [Validators.required]),
       value: new FormControl('0', [Validators.required]),
       maxPeople: new FormControl('', [Validators.required]),
-      idlanguaje: new FormControl('', [Validators.required]),
+      idlanguage: new FormControl('', [Validators.required]),
     });
   }
 
@@ -126,9 +126,11 @@ export class CreateEventComponent implements OnInit {
       eventSave.address = this.saveForm.value.address;
       eventSave.postalcode = this.saveForm.value.postalcode;
       eventSave.idcity = this.saveForm.value.idcity;
+      eventSave.idlanguage = this.saveForm.value.idlanguage;
       eventSave.value = this.saveForm.value.value;
       eventSave.username = this.tokenStorageService.getUsername();
       eventSave.maxPeople = this.saveForm.value.maxPeople;
+      
 
       
       this.eventService.save(eventSave).subscribe( data => {

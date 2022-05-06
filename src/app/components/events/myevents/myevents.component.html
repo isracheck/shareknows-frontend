@@ -1,33 +1,187 @@
 <div class="container-fluid">
-    <p class="lead">Mis Eventos</p>
-    
-    <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Titulo</th>
-            <th scope="col">Fecha inicio</th>
-            <th scope="col">Hora inicio</th>
-            <th scope="col">Fecha final</th>
-            <th scope="col">Hora final</th>
-            <th scope="col">Valor</th>
-            <th scope="col">Asistentes</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let event of eventsList;">
-            <th scope="row">{{event.idevent}}</th>
-            <td>{{event.title}}</td>
-            <td>{{event.startdate | date:'dd/MM/YYYY'}}</td>
-            <td>{{event.startdate | date:'hh:mm'}}</td>
-            <td>{{event.enddate | date:'dd/MM/yyyy'}}</td>
-            <td>{{event.enddate | date:'hh:mm'}}</td>
-            <td>{{event.value}}</td>
-            <td>{{event.maxPeople}}</td>
-            <td><img src="../../../assets/images/window.svg" alt="Login" width="25" height="25"></td>
-            <td><img src="../../../assets/images/modify.svg" alt="Login" width="25" height="25"> </td>
-            <td><img src="../../../assets/images/delete.svg" alt="Login" width="25" height="25"></td>
-          </tr>
-        </tbody>
-      </table>
+  <p class="lead">Mis Eventos</p>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Titulo</th>
+        <th scope="col">Fecha inicio</th>
+        <th scope="col">Hora inicio</th>
+        <th scope="col">Fecha final</th>
+        <th scope="col">Hora final</th>
+        <th scope="col">Valor</th>
+        <th scope="col">Asistentes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let event of eventsList;">
+        <th scope="row">{{event.idevent}}</th>
+        <td>{{event.title}}</td>
+        <td>{{event.startdate | date:'dd/MM/YYYY'}}</td>
+        <td>{{event.startdate | date:'hh:mm'}}</td>
+        <td>{{event.enddate | date:'dd/MM/yyyy'}}</td>
+        <td>{{event.enddate | date:'hh:mm'}}</td>
+        <td>{{event.value}}</td>
+        <td>{{event.maxPeople}}</td>
+        <td><button class="btn"><img src="../../../assets/images/window.svg" alt="Login" width="25" height="25"></button></td>
+        <td><button class="btn"><img src="../../../assets/images/modify.svg" (click)="openPopup(event)" alt="Login" width="25" height="25"></button>
+        </td>
+        <td><button class="btn"><img src="../../../assets/images/delete.svg" alt="Login" width="25" height="25"></button></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}">
+
+    <form [formGroup]="saveForm" (ngSubmit)="saveData()">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <div class="auth-form">
+            <div class="form-body">
+              
+                <div class="mb-1">
+                  <label class="form-label">Titulo</label>
+                  <input type="text" class="form-control" formControlName="title"
+                    [ngClass]="{ 'is-invalid': submitted && fc['title'].errors }" />
+                  <div *ngIf="submitted && fc['title'].errors" class="invalid-feedback">
+                    <div *ngIf="fc['title'].errors['required']">Ingresa un título para tu evento</div>
+                  </div>
+                </div>
+                <div class="mb-1">
+                  <label class="form-label">Descripción</label>
+                  <div class="input-group">
+                    <textarea class="form-control" formControlName="description" aria-label="With textarea"
+                      [ngClass]="{ 'is-invalid': submitted && fc['description'].errors }"></textarea>
+                    <div *ngIf="submitted && fc['description'].errors" class="invalid-feedback">
+                      <div *ngIf="fc['description'].errors['required']">Ingresa una descripción para tu evento</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col mb-1">
+                    <label class="form-label">Fecha y hora de inicio</label>
+                    <input type="datetime-local" class="form-control" formControlName="startdate"
+                      [ngClass]="{ 'is-invalid': submitted && fc['startdate'].errors }" />
+                    <div *ngIf="submitted && fc['startdate'].errors" class="invalid-feedback">
+                      <div *ngIf="fc['startdate'].errors['required']">Ingresa la hora de inicio</div>
+                    </div>
+                  </div>
+                  <div class="col mb-1">
+                    <label class="form-label">Fecha y hora de final</label>
+                    <input type="datetime-local" class="form-control" formControlName="enddate"
+                      [ngClass]="{ 'is-invalid': submitted && fc['enddate'].errors }" />
+                    <div *ngIf="submitted && fc['enddate'].errors" class="invalid-feedback">
+                      <div *ngIf="fc['enddate'].errors['required']">Ingresa la hora de inicio</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="mb-1">
+                  <label class="form-label">Teléfono de contacto</label>
+                  <input type="tel" class="form-control" formControlName="number">
+                </div>
+                <div class="mb-1">
+                  <label class="form-label">Email</label>
+                  <div class="input-group">
+                    <span class="input-group-text" id="basic-addon1">@</span>
+                    <input type="email" class="form-control" formControlName="email"
+                      [ngClass]="{ 'is-invalid': submitted && fc['email'].errors }">
+                    <div *ngIf="submitted && fc['email'].errors" class="invalid-feedback">
+                      <div *ngIf="fc['email'].errors['required']">Ingresa un email de contacto.</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col mb-1">
+                    <label class="form-label">Pais</label>
+                    <select class="form-select" formControlName="idcountry" (change)="onChangeCountry($event)">
+                      <option disabled selected value> -- Selecciona -- </option>
+                      <option *ngFor="let coutry of countryList;" [value]="coutry.idcountry" [selected]="coutry.idcountry == this.idCountrySelected">{{coutry.description}}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="col mb-1">
+                    <label class="form-label">Ciudad</label>
+                    <select class="form-select"  formControlName="idcity"
+                      [ngClass]="{ 'is-invalid': submitted && fc['idcity'].errors }">
+                      <option disabled selected value> -- Selecciona -- </option>
+                      <option *ngFor="let city of cityList;" [value]="city.idcity" [selected]="city.idcity == this.idCitySelected">{{city.name}}</option>
+                    </select>
+                    <div *ngIf="submitted && fc['idcity'].errors" class="invalid-feedback">
+                      <div *ngIf="fc['idcity'].errors['required']">Ingresa una ciudad para tu evento</div>
+                    </div>
+                  </div>
+                  <div class="col mb-1">
+                    <label class="form-label">Código Postal</label>
+                    <input type="text" class="form-control" formControlName="postalcode"
+                      [ngClass]="{ 'is-invalid': submitted && fc['postalcode'].errors }" />
+                    <div *ngIf="submitted && fc['postalcode'].errors" class="invalid-feedback">
+                      <div *ngIf="fc['postalcode'].errors['required']">Ingresa el código postal de tu evento</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="mb-1">
+                  <label class="form-label">Dirección</label>
+                  <input type="text" class="form-control" formControlName="address"
+                    [ngClass]="{ 'is-invalid': submitted && fc['address'].errors }" />
+                  <div *ngIf="submitted && fc['address'].errors" class="invalid-feedback">
+                    <div *ngIf="fc['address'].errors['required']">Ingresa una dirección para tu evento</div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col mb-1">
+                    <label class="form-label">Precio</label>
+                    <input type="text" class="form-control" formControlName="value"
+                      [ngClass]="{ 'is-invalid': submitted && fc['value'].errors }" />
+                    <div *ngIf="submitted && fc['value'].errors" class="invalid-feedback">
+                      <div *ngIf="fc['value'].errors['required']">Si tu evento tiene un precio, indicalo aquí</div>
+                    </div>
+                  </div>
+                  <div class="col col mb-1">
+                    <label class="form-label">Máximo de personas</label>
+                    <input type="number" class="form-control" formControlName="maxPeople"
+                      [ngClass]="{ 'is-invalid': submitted && fc['maxPeople'].errors }" />
+                    <div *ngIf="submitted && fc['maxPeople'].errors" class="invalid-feedback">
+                      <div *ngIf="fc['maxPeople'].errors['required']">Ingresa el máximo de personas que pueden asistir
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col mb-1">
+                    <label class="form-label">Main Lenguaje</label>
+                    <select class="form-select" formControlName="idlanguage"
+                      [ngClass]="{ 'is-invalid': submitted && fc['idlanguage'].errors }">
+                      <option *ngFor="let language of languagesList;" [value]="language.idlanguage">
+                        {{language.description}}</option>
+                    </select>
+                    <div *ngIf="submitted && fc['idlanguage'].errors" class="invalid-feedback">
+                      <div *ngIf="fc['idlanguage'].errors['required']">Ingresa una lenguaje base para tu evento</div>
+                    </div>
+                  </div>
+                </div>
+
+                <br>
+                
+              
+            </div>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          
+          <button type="button" class="btn btn-danger" (click)="closePopup()">
+            Cancelar
+          </button>
+          <div class="title-center">
+            <button type="submit" class="btn btn-success">Actualizar</button>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+    </form>
   </div>
+
+</div>

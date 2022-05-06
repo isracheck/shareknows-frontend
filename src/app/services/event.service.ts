@@ -26,6 +26,11 @@ export class EventService {
         return this.http.post<string>(this.serviceUrl+'save', data, httpOptions);
     }
 
+    update(data: EventModel): Observable<string> {
+       
+      return this.http.put<string>(this.serviceUrl+'update/'+data.idevent, data, httpOptions);
+    }
+
     getEvents(): Observable<any> {
       return this.http.get<any>(this.serviceUrl+"all/")
         .pipe(map(events => {
