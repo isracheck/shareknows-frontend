@@ -1,0 +1,51 @@
+<div class="auth-form">
+    <div class="form-body">
+        <div class="title-center">
+            <h1>Mi perfil</h1>
+        </div>
+        <form [formGroup]="userForm" (ngSubmit)="saveData()">
+            <div class="row">
+            <div class="mb-2 col">
+                <label class="form-label">Usuario</label>
+                <input type="text" class="form-control" formControlName="username"  readonly />
+            </div>
+            <div class="mb-1 col">
+                <label class="form-label">Creado</label>
+                <input type="text" class="form-control" formControlName="createAt" readonly />
+            </div>
+            </div>
+            <div class="mb-1">
+                <label class="form-label">Nombre</label>
+                <input type="text" class="form-control" formControlName="name" [ngClass]="{ 'is-invalid': submitted && fc['name'].errors }">
+                <div *ngIf="submitted && fc['name'].errors" class="invalid-feedback">
+                    <div *ngIf="fc['name'].errors['required']">Ingresa tu nombre.</div>
+                </div>
+            </div>
+            <div class="mb-1">
+                <label class="form-label">Apellidos</label>
+                <input type="text" class="form-control" formControlName="lastname" [ngClass]="{ 'is-invalid': submitted && fc['lastname'].errors }">
+                <div *ngIf="submitted && fc['lastname'].errors" class="invalid-feedback">
+                    <div *ngIf="fc['lastname'].errors['required']">Ingresa tu apellido.</div>
+                </div>
+            </div>
+            <div class="mb-1">
+                <label class="form-label">Teléfono</label>
+                <input type="text" class="form-control" formControlName="phone">
+            </div>
+            <div class="mb-1">
+                <label class="form-label">Email</label>
+                <div class="input-group">
+                    <span class="input-group-text" id="basic-addon1">@</span>
+                    <input type="email" class="form-control" formControlName="email" [ngClass]="{ 'is-invalid': submitted && fc['email'].errors }">
+                    <div *ngIf="submitted && fc['email'].errors" class="invalid-feedback">
+                        <div *ngIf="fc['email'].errors['required']">Ingresa un email válido.</div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="title-center">
+                <button type="submit" class="btn btn-success">Actualizar Datos</button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,8 +1,11 @@
 <div class="container-fluid">
   <p class="lead">Mis Eventos</p>
-
+  <div>
+    <a class="btn btn-success" aria-current="page" routerLink="createEvent">Crear evento</a>
+  </div>
+  <br>
   <table class="table">
-    <thead>
+    <thead class="table-success">
       <tr>
         <th scope="col">#</th>
         <th scope="col">Titulo</th>
@@ -12,6 +15,7 @@
         <th scope="col">Hora final</th>
         <th scope="col">Valor</th>
         <th scope="col">Asistentes</th>
+        <th scope="col"></th>
       </tr>
     </thead>
     <tbody>
@@ -24,24 +28,26 @@
         <td>{{event.enddate | date:'hh:mm'}}</td>
         <td>{{event.value}}</td>
         <td>{{event.maxPeople}}</td>
-        <td><button class="btn"><img src="../../../assets/images/window.svg" alt="Login" width="25" height="25"></button></td>
-        <td><button class="btn"><img src="../../../assets/images/modify.svg" (click)="openPopup(event)" alt="Login" width="25" height="25"></button>
+        <td>
+          <button class="btn"><img src="../../../assets/images/modify.svg" (click)="modifyPopup(event)" width="20"
+              height="20"></button>
+          <button class="btn"><img src="../../../assets/images/delete.svg" (click)="deletePopup(event)" width="20"
+              height="20"></button>
         </td>
-        <td><button class="btn"><img src="../../../assets/images/delete.svg" alt="Login" width="25" height="25"></button></td>
       </tr>
     </tbody>
   </table>
 
 
-  <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}">
+  <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':modifyDisplay}">
 
     <form [formGroup]="saveForm" (ngSubmit)="saveData()">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-body">
-          <div class="auth-form">
-            <div class="form-body">
-              
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+            <div class="auth-form">
+              <div class="form-body">
+
                 <div class="mb-1">
                   <label class="form-label">Titulo</label>
                   <input type="text" class="form-control" formControlName="title"
@@ -98,16 +104,18 @@
                     <label class="form-label">Pais</label>
                     <select class="form-select" formControlName="idcountry" (change)="onChangeCountry($event)">
                       <option disabled selected value> -- Selecciona -- </option>
-                      <option *ngFor="let coutry of countryList;" [value]="coutry.idcountry" [selected]="coutry.idcountry == this.idCountrySelected">{{coutry.description}}
+                      <option *ngFor="let coutry of countryList;" [value]="coutry.idcountry"
+                        [selected]="coutry.idcountry == this.idCountrySelected">{{coutry.description}}
                       </option>
                     </select>
                   </div>
                   <div class="col mb-1">
                     <label class="form-label">Ciudad</label>
-                    <select class="form-select"  formControlName="idcity"
+                    <select class="form-select" formControlName="idcity"
                       [ngClass]="{ 'is-invalid': submitted && fc['idcity'].errors }">
                       <option disabled selected value> -- Selecciona -- </option>
-                      <option *ngFor="let city of cityList;" [value]="city.idcity" [selected]="city.idcity == this.idCitySelected">{{city.name}}</option>
+                      <option *ngFor="let city of cityList;" [value]="city.idcity"
+                        [selected]="city.idcity == this.idCitySelected">{{city.name}}</option>
                     </select>
                     <div *ngIf="submitted && fc['idcity'].errors" class="invalid-feedback">
                       <div *ngIf="fc['idcity'].errors['required']">Ingresa una ciudad para tu evento</div>
@@ -163,25 +171,52 @@
                 </div>
 
                 <br>
-                
-              
+
+
+              </div>
+            </div>
+
+          </div>
+          <div class="modal-footer">
+
+            <button type="button" class="btn btn-danger" (click)="closeModifyPopup()">
+              Cancelar
+            </button>
+            <div class="title-center">
+              <button type="submit" class="btn btn-success">Actualizar</button>
             </div>
           </div>
 
         </div>
-        <div class="modal-footer">
-          
-          <button type="button" class="btn btn-danger" (click)="closePopup()">
-            Cancelar
-          </button>
-          <div class="title-center">
-            <button type="submit" class="btn btn-success">Actualizar</button>
-          </div>
-        </div>
-        
       </div>
-    </div>
     </form>
+  </div>
+
+  <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':deleteDisplay}">
+      <div class="modal-dialog" role="document" style="max-width: 350px; ">
+        <div class="modal-content">
+          <div class="modal-body">
+            <div class="auth-form">
+              <div class="form-body">
+                ¿Está seguro que desea eliminar el evento?
+                <br>
+              </div>
+            </div>
+
+          </div>
+          <div class="modal-footer">
+
+            <button type="button" class="btn btn-danger" (click)="closeDeletePopup()">
+              Cancelar
+            </button>
+            <div class="title-center">
+              <button type="submit" class="btn btn-success" (click)="deleteEvent()">Eliminar</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+  
   </div>
 
 </div>

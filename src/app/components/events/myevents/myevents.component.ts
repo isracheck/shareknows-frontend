@@ -66,18 +66,30 @@ export class MyeventsComponent implements OnInit {
       );
   }
 
-  displayStyle = "none";
+  modifyDisplay = "none";
+  detailDisplay = "none";
+  deleteDisplay = "none";
 
-  openPopup(event: EventModel) {
-    this.displayStyle = "block";
+  modifyPopup(event: EventModel) {
+    this.modifyDisplay = "block";
     this.eventSelected = event;
     this.loadForm();
   }
-  closePopup() {
-    this.displayStyle = "none";
-    this.cleanForm();
+
+  deletePopup(event: any) {
+    this.deleteDisplay = "block";
+    this.eventSelected = event;
+    this.loadForm();
   }
 
+  closeDeletePopup() {
+    this.deleteDisplay = "none";
+  }
+
+  closeModifyPopup() {
+    this.modifyDisplay = "none";
+    this.cleanForm();
+  }
 
   private loadCountries() {
 
@@ -148,35 +160,35 @@ export class MyeventsComponent implements OnInit {
   loadForm() {
     console.log(this.eventSelected);
 
-    if (this.eventSelected.idcity != null ) {     
-       this.citiesService.getCountrie(this.eventSelected.idcity)
-       .pipe(first())
-       .subscribe(
-         data => {
-          this.idCountrySelected = data.idcountry;
-          this.idCitySelected = this.eventSelected.idcity;
-          this.loadCities(this.idCountrySelected);
+    if (this.eventSelected.idcity != null) {
+      this.citiesService.getCountrie(this.eventSelected.idcity)
+        .pipe(first())
+        .subscribe(
+          data => {
+            this.idCountrySelected = data.idcountry;
+            this.idCitySelected = this.eventSelected.idcity;
+            this.loadCities(this.idCountrySelected);
 
-          let startdate: any = this.datePipe.transform(this.eventSelected.startdate, 'yyyy-MM-ddThh:mm');
-          let enddate: any = this.datePipe.transform(this.eventSelected.enddate, 'yyyy-MM-ddThh:mm');
+            let startdate: any = this.datePipe.transform(this.eventSelected.startdate, 'yyyy-MM-ddThh:mm');
+            let enddate: any = this.datePipe.transform(this.eventSelected.enddate, 'yyyy-MM-ddThh:mm');
 
-          this.saveForm.setValue({
-            title: this.eventSelected.title,
-            description: this.eventSelected.description,
-            startdate: startdate,
-            enddate: enddate,
-            number: this.eventSelected.number,
-            email: this.eventSelected.email,
-            address: this.eventSelected.address,
-            postalcode: this.eventSelected.postalcode,
-            idcountry: this.idCountrySelected,
-            idcity: this.idCitySelected,
-            value: this.eventSelected.value,
-            maxPeople: this.eventSelected.maxPeople,
-            idlanguage: this.eventSelected.idlanguage 
-          });
-         }
-       );
+            this.saveForm.setValue({
+              title: this.eventSelected.title,
+              description: this.eventSelected.description,
+              startdate: startdate,
+              enddate: enddate,
+              number: this.eventSelected.number,
+              email: this.eventSelected.email,
+              address: this.eventSelected.address,
+              postalcode: this.eventSelected.postalcode,
+              idcountry: this.idCountrySelected,
+              idcity: this.idCitySelected,
+              value: this.eventSelected.value,
+              maxPeople: this.eventSelected.maxPeople,
+              idlanguage: this.eventSelected.idlanguage
+            });
+          }
+        );
     }
   }
 
@@ -194,11 +206,23 @@ export class MyeventsComponent implements OnInit {
       idcity: '',
       value: '',
       maxPeople: '',
-      idlanguage: '' 
+      idlanguage: ''
     });
 
     this.idCountrySelected = '';
     this.idCitySelected = '';
+  }
+
+  deleteEvent() {
+    this.eventService.delete(this.eventSelected).subscribe(data => {
+      this.toastService.success('Evento eliminado correctamente');
+      this.closeDeletePopup();
+      this.loadEvents();
+    },
+      error => {
+        this.toastService.error('Parece que tenemos un error', 'Ups!',);
+        console.log('Error', error);
+      });
   }
 
   saveData(): void {
@@ -226,7 +250,7 @@ export class MyeventsComponent implements OnInit {
       this.eventService.update(eventSave).subscribe(data => {
         this.toastService.success('Evento modificado correctamente', 'Genial');
         console.log('OK', data);
-        this.closePopup();
+        this.closeModifyPopup();
         this.loadEvents();
       },
         error => {
@@ -234,7 +258,7 @@ export class MyeventsComponent implements OnInit {
           console.log('Error', error);
         });
 
-      
+
     } else {
       return;
     }

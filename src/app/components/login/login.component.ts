@@ -68,7 +68,7 @@ export class LoginComponent implements OnInit {
 
         error => {
           console.log(error);
-          this.toastService.error('Error login in. ' + error.error.message);
+          this.toastService.error('Credenciales Incorrectas');
           //this.isLoading = false;
         }
     );

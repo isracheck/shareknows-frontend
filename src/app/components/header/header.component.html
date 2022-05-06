@@ -15,12 +15,6 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" routerLink="signup">Buscar eventos</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" routerLink="events/createEvent">Crear eventos</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" routerLink="events/myevents">Mis eventos</a>
-        </li>
       </ul>
 
 
@@ -44,8 +38,11 @@
           Mi perfil <img src="../../../assets/images/person-circle.svg" alt="Login" width="25" height="25"> 
         </a>
         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <li><a class="dropdown-item" href="#">Mis Datos</a></li>
-          <li><a class="dropdown-item" routerLink="login">Logout</a></li>
+          <li><a class="dropdown-item" routerLink="profile/myuser">Mi Perfil</a></li>
+          <li><a class="dropdown-item" routerLink="profile/mypassword">Mi Password</a></li>
+          <li><a class="dropdown-item" routerLink="events/myevents">Mis Eventos</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item" routerLink="login">Cerrar sesión</a></li>
         </ul>
       </li>
       </div>

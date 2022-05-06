@@ -136,7 +136,7 @@ export class CreateEventComponent implements OnInit {
       this.eventService.save(eventSave).subscribe( data => {
         this.toastService.success('Evento creado correctamente','Genial');
         console.log('OK',data);
-        this.router.navigate(['/home']);
+        this.router.navigate(['/events/myevents']);
       },
       error => {
         this.toastService.error('Parece que tenemos un error','Ups!',);

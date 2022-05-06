@@ -14,12 +14,12 @@ import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CreateEventComponent } from './components/events/create-event/create-event.component';
 import { CardEventComponent } from './components/events/card-event/card-event.component';
-import { ModalEventComponent } from './components/events/modal-event/modal-event.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { JwtInterceptor } from './auth/jwt.interceptor';
 import { MyeventsComponent } from './components/events/myevents/myevents.component';
-import { MyeventsDetailComponent } from './components/events/myevents-detail/myevents-detail.component';
 import { DatePipe } from '@angular/common';
+import { MyuserComponent } from './components/profile/myuser/myuser.component';
+import { MypasswordComponent } from './components/profile/mypassword/mypassword.component';
 
 @NgModule({
   declarations: [
@@ -31,9 +31,9 @@ import { DatePipe } from '@angular/common';
     LoginComponent,
     CreateEventComponent,
     CardEventComponent,
-    ModalEventComponent,
     MyeventsComponent,
-    MyeventsDetailComponent,
+    MyuserComponent,
+    MypasswordComponent,
   ],
   imports: [
     BrowserModule,

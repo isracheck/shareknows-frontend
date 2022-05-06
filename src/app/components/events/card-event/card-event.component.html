@@ -1,12 +1,12 @@
 <div class="card" style="width: 18rem;">
-  <img [src]="eventData.picture || '../../../assets/images/noimage.jpeg'" class="card-img-top" alt="..." *ngIf="imagen">
+  <!--<img [src]="eventData.picture || '../../../assets/images/noimage.jpeg'" class="card-img-top" alt="..." *ngIf="imagen">-->
   <div class="card-body">
     <h5 class="card-title">{{eventData.title}}</h5>
     <p class="card-text">{{eventData.description}}</p>
-    Fecha <div class="badge bg-success my-2">{{eventData.startdate | date:'dd/mm/yyyy'}}</div> 
+    Fecha <div class="badge bg-success my-2">{{eventData.startdate | date:'dd/MM/yyyy'}}</div>
     Hora <div class="badge bg-success my-2">{{eventData.startdate | date:'HH:MM'}}</div>
-    Huecos <div class="badge bg-primary my-2">{{eventData.maxPeople-totalJoined}}/{{eventData.maxPeople }}</div>
-    
+    Asistentes <div class="badge bg-primary my-2">{{eventData.maxPeople-totalJoined}}/{{eventData.maxPeople }}</div>
+
     <br>
     <div class="d-grid gap-2">
       <a (click)="triggerModal(modalData)" class="btn btn-dark">Apuntarme</a>
@@ -25,7 +25,7 @@
   </div>
   <div class="modal-body">
     <p><strong>Are you sure you want to delete <span class="text-primary">"Agatha Harkness"</span> profile?</strong></p>
-    
+
     <p>All data related to west view profile will be removed permanently.
     </p>
   </div>
