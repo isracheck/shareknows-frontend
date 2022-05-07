@@ -29,7 +29,6 @@ export class CardEventComponent implements OnInit {
     .pipe(first())
       .subscribe(
         data => {
-          console.log(data);
           this.totalJoined = data.length;
         },
         error => {

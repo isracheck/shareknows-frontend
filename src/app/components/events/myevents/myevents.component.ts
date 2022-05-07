@@ -158,7 +158,6 @@ export class MyeventsComponent implements OnInit {
   }
 
   loadForm() {
-    console.log(this.eventSelected);
 
     if (this.eventSelected.idcity != null) {
       this.citiesService.getCountrie(this.eventSelected.idcity)
@@ -249,7 +248,6 @@ export class MyeventsComponent implements OnInit {
 
       this.eventService.update(eventSave).subscribe(data => {
         this.toastService.success('Evento modificado correctamente', 'Genial');
-        console.log('OK', data);
         this.closeModifyPopup();
         this.loadEvents();
       },

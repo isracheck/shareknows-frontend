@@ -1,0 +1,25 @@
+
+
+.imghead {
+    border-end-start-radius: 39%;
+    border-end-end-radius: 242%;
+}
+
+.imghead2 {
+    border-start-start-radius: 242%;
+    border-start-end-radius: 39%;
+}
+
+.card-img {
+    border-end-start-radius: 40%;
+    border-end-end-radius: 45%;
+    border-start-start-radius: 40%;
+}
+
+.card {
+    border-start-start-radius: 40%;
+}
+
+.badge {
+    margin: 1%;
+}

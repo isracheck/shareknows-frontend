@@ -78,7 +78,6 @@ export class MyuserComponent implements OnInit {
   saveData(): void {
 
     this.submitted = true;
-    console.log(this.userForm);
 
     if (this.userForm.valid) {
       const userSave = new UserModel();
@@ -87,11 +86,9 @@ export class MyuserComponent implements OnInit {
       userSave.lastname = this.userForm.value.lastname;
       userSave.phone = this.userForm.value.phone;
       userSave.email = this.userForm.value.email;
-      console.log(userSave);
 
       this.userService.update(userSave).subscribe(data => {
         this.toastr.success('Datos actualizados correctamente');
-        console.log('OK', data);
         this.router.navigate(['/home']);
       },
         error => {

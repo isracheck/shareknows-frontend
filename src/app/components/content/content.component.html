@@ -1,18 +1,34 @@
+<div>
+  <img class="imghead" src="../../../assets/images/people3.png" width="100%">
+</div>
+
 <div class="">
-  <div class="container-lg">
+
+  <div class="container-lg darkback">
+
     <h1 class="display-4">Share(K)nows</h1>
-    <p class="lead">From frictionless supply chains to food we can really trust, learn how industries are
-      revolutionizing business with IBM Blockchain. Let’s put smart to work.™ </p>
+    <p class="lead">Share(K)nows es una plataforma en la que puedes buscar personas para conectar y organizar eventos de
+      intercambio de idiomas. </p>
   </div>
 
-
+  <p> Puedes encontrar eventos en los siguientes paises: </p>
   <div class="container-fluid">
-    <p class="lead">Próximos Eventos</p>
     <div class="row">
-      <div class="col" *ngFor="let event of eventsList;">
-        <app-card-event [eventData]="event" [imagen]="true"></app-card-event>
+      <div class="col" *ngFor="let event of eventsPublic;">
+        <div class="card" style="width: 18rem;">
+          <img src="../../../assets/images/{{event.idcountry}}.png" class="card-img" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">{{event.description}}</h5>
+            <div class="badge bg-success my-2" *ngFor="let cities of event.citiesList;" (click)="redir(cities)" >
+              {{cities.name}}
+            </div>
+          </div>
+        </div>
         <br>
       </div>
     </div>
   </div>
+
+  <img class="imghead2" src="../../../assets/images/people.png" width="100%">
+
 </div>

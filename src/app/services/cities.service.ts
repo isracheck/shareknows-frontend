@@ -16,15 +16,30 @@ const httpOptions = {
 
 export class CitiesService {
 
-    private serviceUrl = environment.baseUrl + 'api/cities/find/';
+  private serviceCitiesUrl = environment.baseUrl + 'api/cities/';
+  private serviceCoutriesUrl = environment.baseUrl + 'api/countries/';
 
-    constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-    getCountrie(city: any): Observable<any> {
-        return this.http.get<any>(this.serviceUrl+city)
-          .pipe(map(events => {
-            return events;
-          }));
-      }
+  getCountrie(city: any): Observable<any> {
+    return this.http.get<any>(this.serviceCitiesUrl + 'find/' + city)
+      .pipe(map(events => {
+        return events;
+      }));
+  }
+
+  getPublicEvents(): Observable<any> {
+    return this.http.get<any>(this.serviceCoutriesUrl + 'all')
+      .pipe(map(events => {
+        return events;
+      }));
+  }
+
+  getEventsFromCity(city: any): Observable<any> {
+    return this.http.get<any>(this.serviceCitiesUrl + 'find/' + city)
+      .pipe(map(events => {
+        return events.eventsList;
+      }));
+  }
 
 }

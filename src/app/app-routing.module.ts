@@ -8,6 +8,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { MyeventsComponent } from './components/events/myevents/myevents.component';
 import { MypasswordComponent } from './components/profile/mypassword/mypassword.component';
 import { MyuserComponent } from './components/profile/myuser/myuser.component';
+import { AlleventsComponent } from './components/events/allevents/allevents.component';
 
 const routes: Routes = [
 
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'profile/mypassword', component: MypasswordComponent },
   { path: 'events/myevents', component: MyeventsComponent },
   { path: 'events/myevents/createEvent', component: CreateEventComponent },
+  { path: 'events/city', component: AlleventsComponent },
 
   // Otherwise redir home
   { path: '', redirectTo: 'home', pathMatch: 'full' }

@@ -20,6 +20,7 @@ import { MyeventsComponent } from './components/events/myevents/myevents.compone
 import { DatePipe } from '@angular/common';
 import { MyuserComponent } from './components/profile/myuser/myuser.component';
 import { MypasswordComponent } from './components/profile/mypassword/mypassword.component';
+import { AlleventsComponent } from './components/events/allevents/allevents.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { MypasswordComponent } from './components/profile/mypassword/mypassword.
     MyeventsComponent,
     MyuserComponent,
     MypasswordComponent,
+    AlleventsComponent,
   ],
   imports: [
     BrowserModule,

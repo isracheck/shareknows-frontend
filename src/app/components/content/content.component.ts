@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { first } from 'rxjs/operators';
-import { EventService } from 'src/app/services/event.service';
+import { CitiesService } from '../../services/cities.service';
+import { NavigationExtras, Router } from '@angular/router';
 
 @Component({
   selector: 'app-content',
@@ -10,25 +11,38 @@ import { EventService } from 'src/app/services/event.service';
 })
 export class ContentComponent implements OnInit {
 
-  eventsList: EventService[] = [];
 
-  constructor(private eventService: EventService, private toastService: ToastrService) { }
+  eventsPublic: any[] = []; 
+
+  constructor(private toastService: ToastrService, private citiesService: CitiesService,
+    private router: Router,) { }
 
   ngOnInit(): void {
-    this.loadEvents();
+    
+    this.loadEventsPublic();
   }
 
-
-  private loadEvents() {
-    this.eventService.getEvents()
+  private loadEventsPublic() {
+    this.citiesService.getPublicEvents()
     .pipe(first())
       .subscribe(
         data => {
-          this.eventsList = data;
+          this.eventsPublic = data;
+          console.log(this.eventsPublic);
         },
         error => {
           this.toastService.error('Error loading cities: ' + error.error.message);
         }
       );
   }
+
+  redir(ruta: any) {
+    console.log(ruta);
+    let navigationExtras: NavigationExtras = {
+      queryParams: { 'citySel': ruta.idcity },
+    }
+    
+    this.router.navigate(['/events/city/'],navigationExtras);
+  }
+
 }

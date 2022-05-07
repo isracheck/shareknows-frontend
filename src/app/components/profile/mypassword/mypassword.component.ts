@@ -43,7 +43,6 @@ export class MypasswordComponent implements OnInit {
   saveData(): void {
 
     this.submitted = true;
-    console.log(this.userForm);
 
     if (this.userForm.value.password != this.userForm.value.confirmPassword) {
       this.toastr.error('El password no coincide');
@@ -54,11 +53,9 @@ export class MypasswordComponent implements OnInit {
       const userSave = new UserModel();
       userSave.username = this.tokenStorageService.getUsername();
       userSave.hash = this.userForm.value.password;
-      console.log(userSave);
 
       this.userService.update(userSave).subscribe(data => {
         this.toastr.success('Datos actualizados correctamente');
-        console.log('OK', data);
         this.router.navigate(['/home']);
       },
         error => {

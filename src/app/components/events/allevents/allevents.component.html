@@ -1,0 +1,29 @@
+<div class="container-fluid">
+    <p class="lead">Próximos Eventos</p>
+
+    <div class="form-body">
+        <div class="col mb-1">
+            <label class="form-label">Pais</label>
+            <select class="form-select" id="idcountry" (change)="onChangeCountry($event)">
+                <option *ngFor="let coutry of countryList;" [value]="coutry.idcountry">{{coutry.description}}
+                </option>
+            </select>
+        </div>
+        <div class="col mb-1">
+            <label class="form-label">Ciudad</label>
+            <select class="form-select" aria-label="Default select example" id="idcity" (change)="onChangeCity($event)">
+                <option value="">Selecciona</option>
+                <option *ngFor="let city of cityList;" [value]="city.idcity">{{city.name}}</option>
+            </select>
+        </div>
+        <br>
+    </div>
+    <br>
+
+    <div class="row">
+        <div class="col" *ngFor="let event of eventsList;">
+            <app-card-event [eventData]="event" [imagen]="true"></app-card-event>
+            <br>
+        </div>
+    </div>
+</div>

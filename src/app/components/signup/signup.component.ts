@@ -43,7 +43,6 @@ export class SignupComponent implements OnInit {
   saveData(): void {
     
     this.submitted = true;
-    console.log(this.signupForm);
 
     if (this.signupForm.valid) {
       const userSave = new UserModel();
@@ -57,7 +56,6 @@ export class SignupComponent implements OnInit {
       
       this.authService.signup(userSave).subscribe( data => {
         this.toastr.success('Alta procesada correctamente','Bienvenido');
-        console.log('OK',data);
         this.router.navigate(['/home']);
       },
       error => {
