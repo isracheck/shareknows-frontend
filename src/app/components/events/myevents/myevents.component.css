@@ -5,3 +5,7 @@
 .modal-content {
     background-color: #f6f8fa;
 }
+
+.modal {
+    background: hsl(0deg 0% 0% / 60%);
+}
