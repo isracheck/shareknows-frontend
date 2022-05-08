@@ -20,7 +20,7 @@ export class SignupComponent implements OnInit {
   // convenience getter for easy access to form fields
   get fc() { return this.signupForm.controls; }
 
-  constructor(private authService: AuthService, private toastr: ToastrService, private router: Router,) { 
+  constructor(private authService: AuthService, private toastr: ToastrService, private router: Router,) {
     this.signupForm = this.createForm();
   }
 
@@ -38,10 +38,10 @@ export class SignupComponent implements OnInit {
     });
   }
 
-  
+
 
   saveData(): void {
-    
+
     this.submitted = true;
 
     if (this.signupForm.valid) {
@@ -53,15 +53,15 @@ export class SignupComponent implements OnInit {
       userSave.phone = this.signupForm.value.phone;
       userSave.email = this.signupForm.value.email;
 
-      
-      this.authService.signup(userSave).subscribe( data => {
-        this.toastr.success('Alta procesada correctamente','Bienvenido');
+
+      this.authService.signup(userSave).subscribe(data => {
+        this.toastr.success('Alta procesada correctamente', 'Bienvenido');
         this.router.navigate(['/home']);
       },
-      error => {
-        this.toastr.error('Parece que tenemos un error','Ups!',);
-        console.log('Error',error);
-      });
+        error => {
+          this.toastr.error('Parece que tenemos un error', 'Ups!',);
+          console.log('Error', error);
+        });
     } else {
       return;
     }

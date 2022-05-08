@@ -12,23 +12,22 @@ import { NavigationExtras, Router } from '@angular/router';
 export class ContentComponent implements OnInit {
 
 
-  eventsPublic: any[] = []; 
+  eventsPublic: any[] = [];
 
   constructor(private toastService: ToastrService, private citiesService: CitiesService,
     private router: Router,) { }
 
   ngOnInit(): void {
-    
+
     this.loadEventsPublic();
   }
 
   private loadEventsPublic() {
     this.citiesService.getPublicEvents()
-    .pipe(first())
+      .pipe(first())
       .subscribe(
         data => {
           this.eventsPublic = data;
-          console.log(this.eventsPublic);
         },
         error => {
           this.toastService.error('Error loading cities: ' + error.error.message);
@@ -37,12 +36,11 @@ export class ContentComponent implements OnInit {
   }
 
   redir(ruta: any) {
-    console.log(ruta);
     let navigationExtras: NavigationExtras = {
       queryParams: { 'citySel': ruta.idcity },
     }
-    
-    this.router.navigate(['/events/city/'],navigationExtras);
+
+    this.router.navigate(['/events/city/'], navigationExtras);
   }
 
 }

@@ -30,7 +30,7 @@
         <td>{{event.value}}</td>
         <td>{{event.maxPeople}}</td>
         <td>
-          <button class="btn"><img src="../../../assets/images/modify.svg" (click)="modifyPopup(event)" width="20"
+          <button class="btn"><img src="../../../assets/images/pencil.svg" (click)="modifyPopup(event)" width="20"
               height="20"></button>
           <button class="btn"><img src="../../../assets/images/delete.svg" (click)="deletePopup(event)" width="20"
               height="20"></button>
@@ -194,30 +194,30 @@
   </div>
 
   <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':deleteDisplay}">
-      <div class="modal-dialog" role="document" style="max-width: 350px; ">
-        <div class="modal-content">
-          <div class="modal-body">
-            <div class="auth-form">
-              <div class="form-body">
-                ¿Está seguro que desea eliminar el evento?
-                <br>
-              </div>
-            </div>
-
-          </div>
-          <div class="modal-footer">
-
-            <button type="button" class="btn btn-danger" (click)="closeDeletePopup()">
-              Cancelar
-            </button>
-            <div class="title-center">
-              <button type="submit" class="btn btn-success" (click)="deleteEvent()">Eliminar</button>
+    <div class="modal-dialog" role="document" style="max-width: 350px; ">
+      <div class="modal-content">
+        <div class="modal-body">
+          <div class="auth-form">
+            <div class="form-body">
+              ¿Está seguro que desea eliminar el evento?
+              <br>
             </div>
           </div>
 
         </div>
+        <div class="modal-footer">
+
+          <button type="button" class="btn btn-danger" (click)="closeDeletePopup()">
+            Cancelar
+          </button>
+          <div class="title-center">
+            <button type="submit" class="btn btn-success" (click)="deleteEvent()">Eliminar</button>
+          </div>
+        </div>
+
       </div>
-  
+    </div>
+
   </div>
 
 </div>

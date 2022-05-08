@@ -32,7 +32,7 @@ export class UserService {
   }
 
   update(info: UserModel): Observable<string> {
-    return this.http.put<string>(this.usersUrl + 'update/'+ info.username, info, httpOptions);
+    return this.http.put<string>(this.usersUrl + 'update/' + info.username, info, httpOptions);
   }
 
   getUserdata(user: String): Observable<any> {

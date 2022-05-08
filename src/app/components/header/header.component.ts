@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private tokenStorageService: TokenStorageService,private router: Router,) { }
+  constructor(private tokenStorageService: TokenStorageService, private router: Router,) { }
 
   isLoged: boolean = false;
 

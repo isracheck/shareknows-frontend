@@ -3,34 +3,153 @@
   <div class="card-body">
     <h5 class="card-title">{{eventData.title}}</h5>
     <p class="card-text">{{eventData.description}}</p>
-    Fecha <div class="badge bg-success my-2">{{eventData.startdate | date:'dd/MM/yyyy'}}</div>
-    Hora <div class="badge bg-success my-2">{{eventData.startdate | date:'HH:MM'}}</div>
-    Asistentes <div class="badge bg-primary my-2">{{eventData.maxPeople-totalJoined}}/{{eventData.maxPeople }}</div>
+    <div class="badge bg-success my-2">{{eventData.startdate | date:'dd/MM/yyyy'}}</div>
+    <div class="badge bg-success my-2">{{eventData.startdate | date:'HH:MM'}}</div>
+    <div class="badge bg-success my-2">{{eventData.maxPeople-totalJoined}}/{{eventData.maxPeople }}</div>
+    <div class="badge bg-success my-2">{{cityData}}</div>
 
     <br>
-    <div class="d-grid gap-2">
-      <a (click)="triggerModal(modalData)" class="btn btn-dark">Apuntarme</a>
-      <a href="#" class="btn btn-dark">Ver más</a>
+    <div class="row">
+      <div class="col">
+        <a (click)="detailPopup()" class="btn btn-sm btn-dark">Ver más</a>
+      </div>
+      <div class="col">
+
+      </div>
+      <div class="col-3" *ngIf="userLogedIsJoined !== undefined">
+        <a (click)="deletePopup(eventData)" class="btn btn-sm btn-danger" *ngIf="userLogedIsJoined === true">
+          <img src="../../../../assets/images/person-dash.svg" width="20">
+        </a>
+        <a (click)="joinPopup(eventData)" class="btn btn-sm btn-warning" *ngIf="userLogedIsJoined === false">
+          <img src="../../../../assets/images/person-plus.svg" width="20">
+        </a>
+      </div>
+
     </div>
   </div>
 </div>
 
 
-<ng-template #modalData let-modal>
-  <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Angular Bootstrap Modal Popup</h4>
-    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-      <span aria-hidden="true">×</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <p><strong>Are you sure you want to delete <span class="text-primary">"Agatha Harkness"</span> profile?</strong></p>
 
-    <p>All data related to west view profile will be removed permanently.
-    </p>
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':deleteDisplay}">
+  <div class="modal-dialog" role="document" style="max-width: 350px; ">
+    <div class="modal-content">
+      <div class="modal-header">
+        <b>Desuscribirse a Evento</b>
+      </div>
+      <div class="modal-body">
+        <div class="auth-form">
+          <div class="form-body">
+            ¿Está seguro que desea desapuntarse del evento?
+            <br>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+
+        <button type="button" class="btn btn-danger" (click)="closeDeletePopup()">
+          no
+        </button>
+        <div class="title-center">
+          <button type="submit" class="btn btn-success" (click)="unsuscribeEvent()">Si</button>
+        </div>
+      </div>
+
+    </div>
   </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-danger" (click)="modal.close('Save click')">Close</button>
-    <button type="button" class="btn btn-success" (click)="modal.close('Save click')">Save</button>
+</div>
+
+
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':joinDisplay}">
+  <div class="modal-dialog" role="document" style="max-width: 350px; ">
+    <div class="modal-content">
+      <div class="modal-header">
+        <b>Suscribirse a Evento</b>
+      </div>
+      <div class="modal-body">
+        <div class="auth-form">
+          <div class="form-body">
+            Para suscribirse al evento, presiona continuar!
+            <br>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+
+        <button type="button" class="btn btn-danger" (click)="closeJoinPopup()">
+          Cancelar
+        </button>
+        <div class="title-center">
+          <button type="submit" class="btn btn-success" (click)="joinEvent()">Continuar</button>
+        </div>
+      </div>
+
+    </div>
   </div>
-</ng-template>
+</div>
+
+
+
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':detailDisplay}">
+  <div class="modal-dialog" role="document" style="max-width: 600px; ">
+    <div class="modal-content">
+      <div class="modal-header">
+        <b>{{eventData.title}}</b>
+      </div>
+      <div class="modal-header">
+        {{eventData.description}}
+      </div>
+      <div class="modal-body">
+        <div class="auth-form">
+          <div class="container">
+            <div class="row">
+              <div class="badge bg-success">Datos importantes:</div>
+            </div>
+            <div class="row">
+              <div class="col">El evento iniciará a las {{eventData.startdate | date:'HH:MM'}} el día
+                {{eventData.startdate | date:'dd/MM/yyyy'}}</div>
+            </div>
+            <div class="row">
+              <div class="col">Plazas disponibles: {{eventData.maxPeople-totalJoined}} </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="badge bg-success">Dirección:</div>
+            </div>
+            <div class="row">
+              <div class="col">{{eventData.address}} </div>
+            </div>
+            <div class="row">
+              <div class="col">Código postal: {{eventData.postalcode}} </div>
+            </div>
+            <div class="row">
+              <div class="col">Ciudad: {{cityData}} </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="badge bg-success">Datos de contacto:</div>
+            </div>
+            <div class="row">
+              <div class="col">Email: {{eventData.email}} </div>
+            </div>
+            <div class="row">
+              <div class="col">Número:{{eventData.number}} </div>
+            </div>
+
+            <br>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+
+        <button type="button" class="btn btn-sm btn-danger" (click)="closeDetailPopup()">
+          cerrar
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>

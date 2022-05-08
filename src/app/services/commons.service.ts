@@ -17,30 +17,30 @@ const httpOptions = {
 
 export class CommonsService {
 
-    private serviceCityUrl = environment.baseUrl + 'api/cities/';
-    private serviceCountryUrl = environment.baseUrl + 'api/countries/';
-    private serviceLanguagesUrl = environment.baseUrl + 'api/languages/';
+  private serviceCityUrl = environment.baseUrl + 'api/cities/';
+  private serviceCountryUrl = environment.baseUrl + 'api/countries/';
+  private serviceLanguagesUrl = environment.baseUrl + 'api/languages/';
 
-    constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-    getCountries(): Observable<any> {
-      return this.http.get<any>(this.serviceCountryUrl+"all")
-        .pipe(map(countries => {
-          return countries;
-        }));
-    }
+  getCountries(): Observable<any> {
+    return this.http.get<any>(this.serviceCountryUrl + "all")
+      .pipe(map(countries => {
+        return countries;
+      }));
+  }
 
-    getCities(idCountry: string): Observable<any> {
-      return this.http.get<any>(this.serviceCityUrl+"findByCountry/"+idCountry)
-        .pipe(map(cities => {
-          return cities;
-        }));
-    }
+  getCities(idCountry: string): Observable<any> {
+    return this.http.get<any>(this.serviceCityUrl + "findByCountry/" + idCountry)
+      .pipe(map(cities => {
+        return cities;
+      }));
+  }
 
-    getLanguages(): Observable<any> {
-      return this.http.get<any>(this.serviceLanguagesUrl+"all")
-        .pipe(map(languages => {
-          return languages;
-        }));
-    }
+  getLanguages(): Observable<any> {
+    return this.http.get<any>(this.serviceLanguagesUrl + "all")
+      .pipe(map(languages => {
+        return languages;
+      }));
+  }
 }

@@ -15,7 +15,7 @@ import { AuthLoginInfo } from '../../model/login.model';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  
+
   public signinForm: FormGroup;
   submitted = false;
   role = '';
@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private tokenStorage: TokenStorageService,
-    private toastService: ToastrService) { 
+    private toastService: ToastrService) {
     this.signinForm = this.createForm();
   }
 
@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
   }
 
   saveData(): void {
-    
+
     this.submitted = true;
 
     if (this.signinForm.valid) {
@@ -56,22 +56,22 @@ export class LoginComponent implements OnInit {
 
 
       this.authService.attemptAuth(userSave)
-      .pipe(first())
-      .subscribe(
-        data => {
-          this.role = this.tokenStorage.getAuthority();
-          this.toastService.show('Bienvenido '+this.tokenStorage.getUsername());
-          // Return to source URL
-          this.router.navigate(['/home']);
-          //this.isLoading = false;
-        },
+        .pipe(first())
+        .subscribe(
+          data => {
+            this.role = this.tokenStorage.getAuthority();
+            this.toastService.show('Bienvenido ' + this.tokenStorage.getUsername());
+            // Return to source URL
+            this.router.navigate(['/home']);
+            //this.isLoading = false;
+          },
 
-        error => {
-          console.log(error);
-          this.toastService.error('Credenciales Incorrectas');
-          //this.isLoading = false;
-        }
-    );
+          error => {
+            console.log(error);
+            this.toastService.error('Credenciales Incorrectas');
+            //this.isLoading = false;
+          }
+        );
 
 
     } else {

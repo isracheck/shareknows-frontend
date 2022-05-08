@@ -38,6 +38,6 @@ export class TokenStorageService {
   }
 
   public getAuthority(): any {
-      return sessionStorage.getItem(AUTHORITY_KEY);
+    return sessionStorage.getItem(AUTHORITY_KEY);
   }
 }

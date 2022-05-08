@@ -23,28 +23,28 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private tokenStorage: TokenStorageService
-    ) {
+  ) {
   }
 
   attemptAuth(credentials: AuthLoginInfo): Observable<JwtResponse> {
-    return this.http.post<JwtResponse>(this.loginUrl+'signin', credentials, httpOptions)
+    return this.http.post<JwtResponse>(this.loginUrl + 'signin', credentials, httpOptions)
       .pipe(map(user => {
         // login successful if there's a jwt token in the response
         if (user && user.accessToken) {
-            // store user details and jwt token in local storage to keep user logged in between page refreshes
-            this.tokenStorage.saveToken(user.accessToken);
-            this.tokenStorage.saveUsername(user.username);
-            this.tokenStorage.saveAuthority(user.authority);
+          // store user details and jwt token in local storage to keep user logged in between page refreshes
+          this.tokenStorage.saveToken(user.accessToken);
+          this.tokenStorage.saveUsername(user.username);
+          this.tokenStorage.saveAuthority(user.authority);
         } else {
-            throw new Error('User not found. Err: PII');
+          throw new Error('User not found. Err: PII');
         }
 
         return user;
-    }));
+      }));
   }
 
   signup(info: UserModel): Observable<string> {
-    return this.http.post<any>(this.loginUrl+'signup', info, httpOptions);
+    return this.http.post<any>(this.loginUrl + 'signup', info, httpOptions);
   }
 
   logOut() {

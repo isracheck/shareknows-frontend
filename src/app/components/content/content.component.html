@@ -6,12 +6,12 @@
 
   <div class="container-lg darkback">
 
-    <h1 class="display-4">Share(K)nows</h1>
-    <p class="lead">Share(K)nows es una plataforma en la que puedes buscar personas para conectar y organizar eventos de
+    <h1 class="display-4">Share(K)now</h1>
+    <p class="lead">Share(K)now es una plataforma en la que puedes buscar personas para conectar y organizar eventos de
       intercambio de idiomas. </p>
   </div>
 
-  <p> Puedes encontrar eventos en los siguientes paises: </p>
+  <p> Puedes encontrar eventos en los siguientes paises pinchando en el nombre de la ciudad: </p>
   <div class="container-fluid">
     <div class="row">
       <div class="col" *ngFor="let event of eventsPublic;">
@@ -19,7 +19,7 @@
           <img src="../../../assets/images/{{event.idcountry}}.png" class="card-img" alt="...">
           <div class="card-body">
             <h5 class="card-title">{{event.description}}</h5>
-            <div class="badge bg-success my-2" *ngFor="let cities of event.citiesList;" (click)="redir(cities)" >
+            <div class="badge bg-success my-2" *ngFor="let cities of event.citiesList;" (click)="redir(cities)">
               {{cities.name}}
             </div>
           </div>

@@ -46,7 +46,7 @@ export class MypasswordComponent implements OnInit {
 
     if (this.userForm.value.password != this.userForm.value.confirmPassword) {
       this.toastr.error('El password no coincide');
-       return;
+      return;
     }
 
     if (this.userForm.valid) {

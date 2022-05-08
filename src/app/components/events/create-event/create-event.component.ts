@@ -35,11 +35,11 @@ export class CreateEventComponent implements OnInit {
   // convenience getter for easy access to form fields
   get fc() { return this.saveForm.controls; }
 
-  constructor(private eventService: EventService, private toastService: ToastrService, 
-              private commonsService: CommonsService, private tokenStorageService: TokenStorageService,
-              private router: Router,
-              ) { 
-  
+  constructor(private eventService: EventService, private toastService: ToastrService,
+    private commonsService: CommonsService, private tokenStorageService: TokenStorageService,
+    private router: Router,
+  ) {
+
     this.saveForm = this.createForm();
   }
 
@@ -50,7 +50,7 @@ export class CreateEventComponent implements OnInit {
 
   private loadCountries() {
     this.commonsService.getCountries()
-    .pipe(first())
+      .pipe(first())
       .subscribe(
         data => {
           this.countryList = data;
@@ -63,7 +63,7 @@ export class CreateEventComponent implements OnInit {
 
   private loadCities(idCountry: string) {
     this.commonsService.getCities(idCountry)
-    .pipe(first())
+      .pipe(first())
       .subscribe(
         data => {
           this.cityList = data;
@@ -76,7 +76,7 @@ export class CreateEventComponent implements OnInit {
 
   private loadLanguages() {
     this.commonsService.getLanguages()
-    .pipe(first())
+      .pipe(first())
       .subscribe(
         data => {
           this.languagesList = data;
@@ -101,7 +101,7 @@ export class CreateEventComponent implements OnInit {
       email: new FormControl('', [Validators.required, Validators.minLength(5), Validators.pattern(this.emailValidator)]),
       address: new FormControl('', [Validators.required]),
       postalcode: new FormControl('', [Validators.required]),
-      idcountry: new FormControl('', ),
+      idcountry: new FormControl('',),
       idcity: new FormControl('', [Validators.required]),
       value: new FormControl('0', [Validators.required]),
       maxPeople: new FormControl('', [Validators.required]),
@@ -109,7 +109,7 @@ export class CreateEventComponent implements OnInit {
     });
   }
 
-  
+
 
   saveData(): void {
 
@@ -130,17 +130,17 @@ export class CreateEventComponent implements OnInit {
       eventSave.value = this.saveForm.value.value;
       eventSave.username = this.tokenStorageService.getUsername();
       eventSave.maxPeople = this.saveForm.value.maxPeople;
-      
 
-      
-      this.eventService.save(eventSave).subscribe( data => {
-        this.toastService.success('Evento creado correctamente','Genial');
+
+
+      this.eventService.save(eventSave).subscribe(data => {
+        this.toastService.success('Evento creado correctamente', 'Genial');
         this.router.navigate(['/events/myevents']);
       },
-      error => {
-        this.toastService.error('Parece que tenemos un error','Ups!',);
-        console.log('Error',error);
-      });
+        error => {
+          this.toastService.error('Parece que tenemos un error', 'Ups!',);
+          console.log('Error', error);
+        });
     } else {
       return;
     }

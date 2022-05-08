@@ -1,10 +1,11 @@
 <div class="container-fluid">
-    <p class="lead">Próximos Eventos</p>
 
-    <div class="form-body">
+    <br>
+    <div class="form-body" *ngIf="citySelected === undefined || citySelected === null">
         <div class="col mb-1">
             <label class="form-label">Pais</label>
             <select class="form-select" id="idcountry" (change)="onChangeCountry($event)">
+                <option value="">Selecciona</option>
                 <option *ngFor="let coutry of countryList;" [value]="coutry.idcountry">{{coutry.description}}
                 </option>
             </select>
@@ -16,9 +17,9 @@
                 <option *ngFor="let city of cityList;" [value]="city.idcity">{{city.name}}</option>
             </select>
         </div>
-        <br>
     </div>
     <br>
+    <p class="lead">Próximos Eventos</p>
 
     <div class="row">
         <div class="col" *ngFor="let event of eventsList;">

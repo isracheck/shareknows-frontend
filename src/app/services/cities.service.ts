@@ -42,4 +42,11 @@ export class CitiesService {
       }));
   }
 
+  getCity(city: any): Observable<any> {
+    return this.http.get<any>(this.serviceCitiesUrl + 'find/' + city)
+      .pipe(map(events => {
+        return events;
+      }));
+  }
+
 }

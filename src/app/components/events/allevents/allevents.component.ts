@@ -22,27 +22,24 @@ export class AlleventsComponent implements OnInit {
   cityList: CityModel[] = [];
 
   constructor(private eventService: EventService, private toastService: ToastrService, private citiesService: CitiesService,
-    private activatedRoute: ActivatedRoute, private commonsService: CommonsService,) { 
+    private activatedRoute: ActivatedRoute, private commonsService: CommonsService,) {
 
-      console.log(this.activatedRoute);
+    this.activatedRoute.queryParams.subscribe(params => {
+      this.citySelected = params['citySel'];
+    });
 
-
-      this.activatedRoute.queryParams.subscribe(params => {
-        this.citySelected = params['citySel'];
-      });
-      console.log(this.citySelected);
   }
 
   ngOnInit(): void {
     this.loadEvents();
     this.loadCountries();
-    
+
   }
 
 
   private loadCountries() {
     this.commonsService.getCountries()
-    .pipe(first())
+      .pipe(first())
       .subscribe(
         data => {
           this.countryList = data;
@@ -55,7 +52,7 @@ export class AlleventsComponent implements OnInit {
 
   private loadCities(idCountry: string) {
     this.commonsService.getCities(idCountry)
-    .pipe(first())
+      .pipe(first())
       .subscribe(
         data => {
           this.cityList = data;
@@ -78,30 +75,30 @@ export class AlleventsComponent implements OnInit {
 
   private loadEvents() {
 
-    console.log(this.citySelected);
+
     if (this.citySelected !== null && this.citySelected !== undefined) {
 
       this.citiesService.getEventsFromCity(this.citySelected)
-      .pipe(first())
-      .subscribe(
-        data => {
-          this.eventsList = data;
-        },
-        error => {
-          this.toastService.error('Error loading cities: ' + error.error.message);
-        }
-      );
+        .pipe(first())
+        .subscribe(
+          data => {
+            this.eventsList = data;
+          },
+          error => {
+            this.toastService.error('Error loading cities: ' + error.error.message);
+          }
+        );
     } else {
-    this.eventService.getEvents()
-    .pipe(first())
-      .subscribe(
-        data => {
-          this.eventsList = data;
-        },
-        error => {
-          this.toastService.error('Error loading cities: ' + error.error.message);
-        }
-      );
+      this.eventService.getEvents()
+        .pipe(first())
+        .subscribe(
+          data => {
+            this.eventsList = data;
+          },
+          error => {
+            this.toastService.error('Error loading cities: ' + error.error.message);
+          }
+        );
     }
   }
 
