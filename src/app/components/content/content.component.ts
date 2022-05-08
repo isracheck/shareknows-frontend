@@ -3,6 +3,7 @@ import { ToastrService } from 'ngx-toastr';
 import { first } from 'rxjs/operators';
 import { CitiesService } from '../../services/cities.service';
 import { NavigationExtras, Router } from '@angular/router';
+import { TokenStorageService } from '../../auth/token-storage.service';
 
 @Component({
   selector: 'app-content',
@@ -14,10 +15,15 @@ export class ContentComponent implements OnInit {
 
   eventsPublic: any[] = [];
 
-  constructor(private toastService: ToastrService, private citiesService: CitiesService,
+  constructor(private toastService: ToastrService, private citiesService: CitiesService,private tokenStorageService: TokenStorageService,
     private router: Router,) { }
 
   ngOnInit(): void {
+
+    if (this.tokenStorageService.getRefresh() === "true") {
+      this.tokenStorageService.saveRefresh("false");
+      window.location.reload();
+    }
 
     this.loadEventsPublic();
   }

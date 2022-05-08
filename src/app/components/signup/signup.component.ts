@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { UserModel } from '../../model/user.model';
 import { AuthService } from '../../auth/auth.service';
 import { Router } from '@angular/router';
+import { TokenStorageService } from '../../auth/token-storage.service';
 
 @Component({
   selector: 'app-signup',
@@ -20,7 +21,7 @@ export class SignupComponent implements OnInit {
   // convenience getter for easy access to form fields
   get fc() { return this.signupForm.controls; }
 
-  constructor(private authService: AuthService, private toastr: ToastrService, private router: Router,) {
+  constructor(private authService: AuthService, private toastr: ToastrService, private router: Router) {
     this.signupForm = this.createForm();
   }
 

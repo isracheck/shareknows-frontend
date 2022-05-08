@@ -30,11 +30,16 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private tokenStorage: TokenStorageService,
-    private toastService: ToastrService) {
+    private toastService: ToastrService,
+    private tokenStorageService: TokenStorageService) {
     this.signinForm = this.createForm();
   }
 
   ngOnInit(): void {
+    if (this.tokenStorageService.getRefresh() === "true") {
+      this.tokenStorageService.saveRefresh("false");
+      window.location.reload();
+    }
     this.authService.logOut();
   }
 
@@ -62,6 +67,7 @@ export class LoginComponent implements OnInit {
             this.role = this.tokenStorage.getAuthority();
             this.toastService.show('Bienvenido ' + this.tokenStorage.getUsername());
             // Return to source URL
+            this.tokenStorageService.saveRefresh("true");
             this.router.navigate(['/home']);
             //this.isLoading = false;
           },
